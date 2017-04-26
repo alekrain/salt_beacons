@@ -2,6 +2,9 @@
 
 These are a collection of SaltStack Beacons that are for use in an environment managed with SaltStack. Each has it's own purpose that should be apparent from it's name, and each requires its own set of configuration data in order to work properly. The configuration data is generally made available to the beacon through Pillar data, but may also be provided from the minion's config file `/etc/salt/minion`.
 
+Note that some beacons have modules that must be installed before they will work. Please look for the import statement inside a try block at the top of each file.
+
+
 ## Example
 As an example, lets use the `salt_minion_heartbeat` beacon. This beacon requires the following data to be available in the minion's Pillar or in the minion's config file:
 
@@ -18,4 +21,4 @@ This configuration data tells the SaltStack minion that a file called `salt_mini
 The `tag_append` value in the configuration data is also made available to the beacon, but as it is empty it doesn't really have an effect.
 
 All beacons should reside in a folder on the master, and if using the default file roots, it will be `/srv/salt/_beacons`.
-In order for the minion to receive the beacons, we must execute `salt-call saltutil.sync_beacons && service salt-minion restart`. The minion will then download all the files in the `_beacons` directory and restart. Assuming the beacon config data is available, the minion should start producing beacon events. 
+In order for the minion to receive the beacons, we must execute `salt-call saltutil.sync_beacons && service salt-minion restart`. The minion will then download all the files in the `_beacons` directory and restart. Assuming the beacon config data is available, the minion should start producing beacon events.
